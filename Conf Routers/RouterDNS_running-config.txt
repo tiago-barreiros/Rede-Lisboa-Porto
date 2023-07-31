@@ -1,0 +1,83 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname RouterDNS
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Serial0/0
+ no ip address
+ encapsulation frame-relay
+ clock rate 2000000
+!
+interface Serial0/0.301 point-to-point
+ ip address 10.10.0.30 255.255.255.252
+ frame-relay interface-dlci 301
+!
+interface Serial0/0.401 point-to-point
+ ip address 192.168.1.2 255.255.255.252
+ frame-relay interface-dlci 401
+!
+interface FastEthernet1/0
+ ip address 8.0.0.1 255.0.0.0
+ duplex auto
+ speed auto
+!
+router rip
+ version 2
+ network 8.0.0.0
+ network 10.0.0.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

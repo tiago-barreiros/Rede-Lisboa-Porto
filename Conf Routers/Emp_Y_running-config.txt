@@ -1,0 +1,87 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Emp_Y
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 10.10.0.10 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ ip address 91.198.174.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet2/0
+ ip address 208.80.154.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet3/0
+ ip address 20.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+router rip
+ version 2
+ network 10.0.0.0
+ network 20.0.0.0
+ network 91.0.0.0
+ network 208.80.154.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

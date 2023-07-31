@@ -1,0 +1,90 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname GigaPixLx
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 10.10.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0
+ ip address 10.10.0.5 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet2/0
+ ip address 10.10.0.9 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet3/0
+ ip address 10.10.0.33 255.255.255.252
+!
+router ospf 10
+ router-id 1.1.1.1
+ log-adjacency-changes
+ redistribute rip subnets 
+ network 10.10.0.0 0.0.0.3 area 0
+!
+router rip
+ version 2
+ redistribute ospf 10 metric 12 
+ network 10.0.0.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+banner motd #Bem Vindo ao Router GigaPix de Lisboa#
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

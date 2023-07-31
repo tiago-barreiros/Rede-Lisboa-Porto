@@ -1,0 +1,97 @@
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Emp_X_Porto
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ ip address 10.0.0.10 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0
+ ip address 12.0.0.1 255.0.0.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0.1
+ encapsulation dot1Q 1 native
+ ip address 172.17.1.1 255.255.255.0
+!
+interface GigabitEthernet1/0.100
+ encapsulation dot1Q 100
+ ip address 172.17.100.1 255.255.255.0
+ ip helper-address 172.16.0.1
+!
+interface GigabitEthernet1/0.101
+ encapsulation dot1Q 101
+ ip address 172.17.101.1 255.255.255.0
+ ip helper-address 172.16.0.1
+!
+interface GigabitEthernet1/0.200
+ encapsulation dot1Q 200
+ ip address 172.17.200.1 255.255.255.0
+ ip access-group 1 out
+!
+router rip
+ version 2
+ network 10.0.0.0
+ network 12.0.0.0
+ network 172.17.0.0
+ no auto-summary
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 1 deny host 172.17.101.2
+access-list 1 deny host 172.17.101.3
+access-list 1 deny host 172.16.101.2
+access-list 1 permit any
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
